@@ -4,7 +4,7 @@ import SocialLink from "@/app/components/SocialLink/socialLink";
 
 const FooterContent = () => {
     return (
-        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-20">
             <div className="space-y-4">
                 <h4 className="text-lg font-medium">Product</h4>
                 <ul className="space-y-2">
@@ -41,12 +41,12 @@ const FooterContent = () => {
                     <li className="flex flex-col md:flex-row items-start md:items-center gap-2">
                         <Mail className="hidden lg:block w-4 h-4 text-gray-400"/>
                         <FooterLink href="mailto:contact@netguard.com" className="flex items-center gap-2">
-                            contact@netguard.com
+                            info@netguard.com
                         </FooterLink>
                     </li>
                     <li className="flex flex-col md:flex-row items-start md:items-center gap-2">
                         <Phone className="hidden lg:block w-4 h-4 text-gray-400 "/>
-                        <FooterLink href="mailto:contact@netguard.com" className="flex items-center gap-2">
+                        <FooterLink href="#" className="flex items-center gap-2">
                             +1 (480) 555-0123
                         </FooterLink>
                     </li>
