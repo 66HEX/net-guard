@@ -29,15 +29,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 
     return (
         <div
-            className={`group relative p-6 rounded-3xl backdrop-blur-md bg-gradient-to-br from-white/[0.05] to-white/[0.02] 
+            className={`group relative p-6 rounded-3xl backdrop-blur-md bg-white/[0.02] 
         border border-white/[0.05] hover:border-white/[0.1] transition-all duration-500 ${className}`}
         >
             <GlowingBorder />
 
             <div className="relative z-10">
                 <div className="relative mb-4">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 blur-xl
-            transform group-hover:scale-110 transition-transform duration-500" />
                     <Icon className="w-8 h-8 text-green-400 relative z-10" />
                 </div>
 

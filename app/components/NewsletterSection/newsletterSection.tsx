@@ -14,10 +14,9 @@ const NewsletterSection = () => {
                     <p className="text-gray-400 mb-6">
                         Get the latest updates on security features and product releases.
                     </p>
-                    <div className="flex gap-4 max-w-md mx-auto">
+                    <div className="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
                         <div className="flex-grow relative group">
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400/20 to-green-500/20 opacity-0
-                                            group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
+                            <GlowingBorder/>
                             <input
                                 type="email"
                                 placeholder="Enter your email"
@@ -26,7 +25,7 @@ const NewsletterSection = () => {
                                           placeholder-gray-500 relative z-10"
                             />
                         </div>
-                        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-green-400 to-green-500
+                        <button className="flex justify-center px-6 py-3 rounded-full bg-gradient-to-r from-green-400 to-green-500
                                              text-black font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
                             Subscribe
                             <ArrowRight className="w-4 h-4" />

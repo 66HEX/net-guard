@@ -101,8 +101,34 @@ export default function Navbar() {
                     <div className="w-full mx-auto flex items-center justify-between relative">
                         <button
                             onClick={() => handleScroll('#hero')}
-                            className="text-white/80 text-2xl font-bold">
-                            NetGuard
+                            className="text-white/80 font-bold ml-0 lg:ml-4">
+                            <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" className="h-10 w-auto">
+                                <defs>
+                                    <style>
+                                        {`@font-face {
+                                            font-family: 'Lausanne';
+                                            src: url('/fonts/TWKLausanne-700.woff2') format('woff2'),
+                                                 url('/fonts/TWKLausanne-700.woff') format('woff');
+                                        }`}
+                                    </style>
+                                </defs>
+
+                                <g transform="translate(20, 20)">
+                                    <circle cx="30" cy="30" r="30" fill="none" stroke="currentColor" strokeWidth="6"/>
+                                    <path d="M0,30 L60,30" stroke="currentColor" strokeWidth="6"/>
+                                    <path d="M30,0 Q60,30 30,60" stroke="currentColor" strokeWidth="6" fill="none"/>
+                                    <path d="M30,0 Q0,30 30,60" stroke="currentColor" strokeWidth="6" fill="none"/>
+                                </g>
+
+                                <text x="100" y="65"
+                                      fontFamily="Lausanne, -apple-system, sans-serif"
+                                      fontWeight="700"
+                                      fontSize="42px"
+                                      letterSpacing="-0.5px"
+                                      fill="currentColor">
+                                    NetGuard
+                                </text>
+                            </svg>
                         </button>
                         <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                             {menuItems.map((item) => (
@@ -115,7 +141,8 @@ export default function Navbar() {
                                 </button>
                             ))}
                         </div>
-                        <button className="hidden md:block backdrop-blur-md bg-white/[0.02] border border-white/[0.05] text-white/80 px-6 py-3 rounded-full text-sm font-medium hover:bg-white/[0.05] transition-colors">
+                        <button
+                            className="hidden md:block backdrop-blur-md bg-white/[0.02] border border-white/[0.05] text-white/80 px-6 py-3 rounded-full text-sm font-medium hover:bg-white/[0.05] transition-colors">
                             Get Started
                         </button>
                         <button
@@ -123,9 +150,9 @@ export default function Navbar() {
                             className="md:hidden text-white/80 hover:text-green-400 transition-colors z-50"
                         >
                             {isMenuOpen ? (
-                                <X className="h-6 w-6" />
+                                <X className="h-6 w-6"/>
                             ) : (
-                                <Menu className="h-6 w-6" />
+                                <Menu className="h-6 w-6"/>
                             )}
                         </button>
                     </div>
@@ -135,19 +162,18 @@ export default function Navbar() {
             {isMenuOpen && (
                 <div
                     ref={menuRef}
-                    className="fixed inset-0 w-screen h-screen md:hidden backdrop-blur-md bg-black/[0.02] z-40"
+                    className="fixed inset-0 w-screen h-screen md:hidden backdrop-blur-md bg-black/40 z-40"
                 >
                     <div className="flex flex-col items-center justify-center h-full gap-8">
                         {menuItems.map((item) => (
-                            <a
+                            <button
                                 key={item.href}
                                 ref={item.ref}
-                                href={item.href}
                                 className="text-lg text-white/80 hover:text-white transition-colors"
-                                onClick={() => closeMenu()}
+                                onClick={() => handleScroll(item.href)}
                             >
                                 {item.label}
-                            </a>
+                            </button>
                         ))}
                         <button
                             ref={refs.getStarted}

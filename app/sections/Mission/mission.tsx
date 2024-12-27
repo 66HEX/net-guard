@@ -4,17 +4,13 @@ import BackgroundOverlay2 from "@/app/components/BackgroundOverlay2/backgroundOv
 
 const Mission = () => {
     return (
-        <section id="mission" className="relative w-full min-h-screen bg-black/10 text-white overflow-hidden">
+        <section id="mission" className="relative w-full min-h-screen bg-black/60 text-white overflow-hidden">
             <BackgroundOverlay2 />
-            <div className="absolute inset-0">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-400/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-            </div>
             <div className="max-w-7xl mx-auto relative py-20 px-4">
                 <div className="grid lg:grid-cols-2 gap-12">
                     <div className="relative">
                         <div className="sticky top-20">
-                            <h2 className="text-5xl lg:text-6xl font-medium leading-tight mb-8">
+                            <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-8 text-center md:text-left">
                                 Securing the
                                 <span className="block mt-2 bg-gradient-to-r from-green-400 to-green-700 text-transparent bg-clip-text">
                                     Digital Future
@@ -66,9 +62,7 @@ const Mission = () => {
                             }
                         ].map((value, index) => (
                             <div key={index} className="group relative">
-                                <div className={`absolute inset-0 bg-gradient-to-r ${value.color} to-transparent 
-                                                rounded-3xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500`} />
-
+                                <GlowingBorder />
                                 <div className="relative backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
                                                 rounded-3xl p-8 group-hover:border-white/[0.1] transition-all duration-500">
                                     <div className="flex items-start gap-6">

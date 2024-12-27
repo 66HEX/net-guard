@@ -7,7 +7,7 @@ import StatsOverview from "@/app/components/StatsOverview/statsOverview";
 
 export default function Features() {
     return (
-        <section id="features" className="relative w-full min-h-screen bg-black/10 text-white overflow-hidden">
+        <section id="features" className="relative w-full min-h-screen bg-black/60 text-white overflow-hidden">
             <BackgroundOverlay2 />
             <div className="max-w-7xl mx-auto py-20 px-4">
                 <div className="text-center mb-16 relative">

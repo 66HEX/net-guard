@@ -1,10 +1,10 @@
 import FooterLink from "@/app/components/FooterLink/footerLink";
-import {Github, Linkedin, Mail, Twitter} from "lucide-react";
+import {Github, Linkedin, Mail, Phone, Twitter} from "lucide-react";
 import SocialLink from "@/app/components/SocialLink/socialLink";
 
 const FooterContent = () => {
     return (
-        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-12">
+        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="space-y-4">
                 <h4 className="text-lg font-medium">Product</h4>
                 <ul className="space-y-2">
@@ -38,17 +38,23 @@ const FooterContent = () => {
             <div className="space-y-4">
                 <h4 className="text-lg font-medium">Contact</h4>
                 <ul className="space-y-2">
-                    <li>
+                    <li className="flex flex-col md:flex-row items-start md:items-center gap-2">
+                        <Mail className="hidden lg:block w-4 h-4 text-gray-400"/>
                         <FooterLink href="mailto:contact@netguard.com" className="flex items-center gap-2">
-                            <Mail className="w-4 h-4" />
                             contact@netguard.com
+                        </FooterLink>
+                    </li>
+                    <li className="flex flex-col md:flex-row items-start md:items-center gap-2">
+                        <Phone className="hidden lg:block w-4 h-4 text-gray-400 "/>
+                        <FooterLink href="mailto:contact@netguard.com" className="flex items-center gap-2">
+                            +1 (480) 555-0123
                         </FooterLink>
                     </li>
                 </ul>
                 <div className="flex gap-3 pt-4">
-                    <SocialLink href="#" icon={Twitter} />
-                    <SocialLink href="#" icon={Linkedin} />
-                    <SocialLink href="#" icon={Github} />
+                    <SocialLink href="#" icon={Twitter}/>
+                    <SocialLink href="#" icon={Linkedin}/>
+                    <SocialLink href="#" icon={Github}/>
                 </div>
             </div>
         </div>

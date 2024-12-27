@@ -16,10 +16,38 @@ interface PricingCardProps {
     isAnnual: boolean;
 }
 
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+
 const PricingCard = ({ plan, isPopular, isAnnual }: PricingCardProps) => {
     const Icon = plan.icon;
     const monthlyPrice = plan.price;
     const annualPrice = parseFloat((plan.price * 0.8).toFixed(2));
+    const priceRef = useRef(null);
+    const savingsRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(priceRef.current, {
+                opacity: 0,
+                y: 20,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+
+            if (isAnnual) {
+                gsap.from(savingsRef.current, {
+                    opacity: 0,
+                    y: 10,
+                    duration: 0.5,
+                    delay: 0.2,
+                    ease: "power2.out"
+                });
+            }
+        });
+
+        return () => ctx.revert();
+    }, [isAnnual]);
 
     return (
         <div className={`relative group ${isPopular ? 'lg:-mt-8' : ''}`}>
@@ -46,14 +74,14 @@ const PricingCard = ({ plan, isPopular, isAnnual }: PricingCardProps) => {
                     </div>
                 </div>
                 <div className="mb-6">
-                    <div className="flex items-baseline gap-2">
+                    <div ref={priceRef} className="flex items-baseline gap-2">
                         <span className="text-4xl font-bold text-white">
                           ${isAnnual ? annualPrice : monthlyPrice}
                         </span>
                         <span className="text-gray-400">/mo</span>
                     </div>
                     {isAnnual && (
-                        <div className="text-sm text-green-400 mt-1">
+                        <div ref={savingsRef} className="text-sm text-green-400 mt-1">
                             Save ${((monthlyPrice - annualPrice) * 12).toFixed(2)} yearly
                         </div>
                     )}

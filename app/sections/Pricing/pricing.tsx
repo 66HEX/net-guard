@@ -16,7 +16,7 @@ const Pricing = () => {
             name: "Starter",
             icon: Shield,
             price: 29,
-            description: "Perfect for individuals and small teams",
+            description: "For individuals and small teams",
             features: [
                 "Up to 10 team members",
                 "Zero Trust Network Access",
@@ -62,18 +62,13 @@ const Pricing = () => {
     ];
 
     return (
-        <section id="pricing" className="relative w-full min-h-screen bg-black/10 text-white overflow-hidden">
+        <section id="pricing" className="relative w-full min-h-screen bg-black/60 text-white overflow-hidden">
             <BackgroundOverlay2/>
-            <div className="absolute inset-0">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-400/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-            </div>
-
             <div className="max-w-7xl mx-auto relative py-20 px-4">
                 <div className="text-center max-w-3xl mx-auto mb-12">
                     <h2 className="text-4xl md:text-5xl font-medium mb-6">
                         Simple,
-                        <span className="bg-gradient-to-r from-green-400 to-green-700 text-transparent bg-clip-text">
+                        <span className="ml-1 bg-gradient-to-r from-green-400 to-green-700 text-transparent bg-clip-text">
                             Transparent
                         </span> Pricing
                     </h2>

@@ -1,0 +1,28 @@
+<svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <style>
+      @font-face {
+      font-family: 'Lausanne';
+      src: url('/fonts/TWKLausanne-700.woff2') format('woff2'),
+      url('/fonts/TWKLausanne-700.woff') format('woff');
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(20, 20)">
+    <circle cx="30" cy="30" r="30" fill="none" stroke="black" stroke-width="6"/>
+    <path d="M0,30 L60,30" stroke="black" stroke-width="6"/>
+    <path d="M30,0 Q60,30 30,60" stroke="black" stroke-width="6" fill="none"/>
+    <path d="M30,0 Q0,30 30,60" stroke="black" stroke-width="6" fill="none"/>
+  </g>
+
+  <text x="100" y="60" 
+        font-family="Lausanne, -apple-system, sans-serif"
+        font-weight="700"
+        font-size="42px"
+        letter-spacing="-0.5px"
+        fill="black">
+    NetGuard
+  </text>
+</svg>
