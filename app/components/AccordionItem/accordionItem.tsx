@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 
 interface AccordionItemProps {
@@ -9,54 +9,56 @@ interface AccordionItemProps {
     onClick: () => void;
 }
 
-// Funkcja inicjalizująca wysokość akordeonu
-const initializeAccordionHeight = (
-    contentRef: HTMLDivElement | null,
-    innerRef: HTMLDivElement | null
-) => {
-    if (!contentRef || !innerRef) return;
-    const height = innerRef.offsetHeight;
-    gsap.set(contentRef, { height: 0 });
-    return height;
-};
-
-const animateAccordion = async (
-    contentRef: HTMLDivElement | null,
-    height: number,
-    isOpen: boolean
-) => {
-    if (!contentRef) return;
-
-    await gsap.to(contentRef, {
-        height: isOpen ? height : 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        force3D: true
-    });
-};
-
 const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps) => {
     const contentRef = useRef<HTMLDivElement | null>(null);
     const innerRef = useRef<HTMLDivElement | null>(null);
-    const [contentHeight, setContentHeight] = useState(0);
+    const animation = useRef<gsap.core.Tween | null>(null);
 
-    useEffect(() => {
-        const height = initializeAccordionHeight(contentRef.current, innerRef.current);
-        if (height) setContentHeight(height);
+    const animateAccordion = useCallback(() => {
+        if (!contentRef.current || !innerRef.current) return;
 
-        const handleResize = () => {
-            if (innerRef.current) {
-                setContentHeight(innerRef.current.offsetHeight);
+        // Zatrzymaj poprzednią animację
+        if (animation.current) {
+            animation.current.kill();
+        }
+
+        // Pobierz aktualną wysokość bezpośrednio przed animacją
+        const height = innerRef.current.offsetHeight;
+
+        // Utwórz nową animację
+        animation.current = gsap.to(contentRef.current, {
+            height: isOpen ? height : 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            overwrite: true,
+            force3D: true,
+            onComplete: () => {
+                if (!contentRef.current) return;
+                if (isOpen) {
+                    contentRef.current.style.height = 'auto';
+                }
             }
-        };
+        });
+    }, [isOpen]);
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [answer]);
-
+    // Obserwuj zmiany rozmiaru contentu
     useEffect(() => {
-        animateAccordion(contentRef.current, contentHeight, isOpen);
-    }, [isOpen, contentHeight]);
+        if (!innerRef.current) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            if (isOpen) {
+                animateAccordion();
+            }
+        });
+
+        resizeObserver.observe(innerRef.current);
+        return () => resizeObserver.disconnect();
+    }, [isOpen, animateAccordion]);
+
+    // Uruchom animację przy zmianie stanu isOpen
+    useEffect(() => {
+        animateAccordion();
+    }, [isOpen, animateAccordion]);
 
     return (
         <div className="mb-4">
@@ -74,7 +76,8 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             </button>
             <div
                 ref={contentRef}
-                className="overflow-hidden"
+                className="overflow-hidden will-change-[height]"
+                style={{ height: 0 }}
             >
                 <div
                     ref={innerRef}

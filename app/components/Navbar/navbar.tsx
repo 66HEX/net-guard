@@ -147,12 +147,12 @@ export default function Navbar() {
                         </button>
                         <button
                             onClick={toggleMenu}
-                            className="md:hidden text-white/80 hover:text-green-400 transition-colors z-50"
+                            className="md:hidden text-white/80 transition-colors z-50 mr-2"
                         >
                             {isMenuOpen ? (
-                                <X className="h-6 w-6"/>
+                                <X className="h-8 w-8"/>
                             ) : (
-                                <Menu className="h-6 w-6"/>
+                                <Menu className="h-8 w-8"/>
                             )}
                         </button>
                     </div>
