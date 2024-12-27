@@ -7,8 +7,21 @@ import {
 } from 'recharts';
 import {
     Shield, AlertTriangle, Activity, Globe,
-    Users, Lock, Server, Wifi
+    Users, Lock, Server, Wifi, LucideIcon
 } from 'lucide-react';
+
+interface QuickActionCardProps {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+}
+
+interface StatCardProps {
+    icon: LucideIcon;
+    label: string;
+    value: string | number;
+    trend: string;
+}
 
 const data = [
     { name: 'Mon', threats: 12, traffic: 845, users: 125 },
@@ -24,10 +37,7 @@ const DashboardSection = () => {
     return (
         <section className="w-full min-h-screen bg-black/60 text-white relative overflow-hidden">
             <BackgroundOverlay2/>
-
-            {/* Content container */}
             <div className="max-w-7xl mx-auto relative py-20 px-4 mt-32">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-medium mb-6">
                         Powerful <span className="bg-gradient-to-r from-green-400 to-green-700 text-transparent bg-clip-text">Analytics</span> Dashboard
@@ -37,17 +47,13 @@ const DashboardSection = () => {
                     </p>
                 </div>
 
-                {/* Main Dashboard Mock */}
                 <div className="bg-black/40 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl">
-                    {/* Top Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                         <StatCard icon={Shield} label="Protected Endpoints" value="1,456" trend="+12%" />
                         <StatCard icon={AlertTriangle} label="Threats Blocked" value="23,651" trend="+8%" />
                         <StatCard icon={Activity} label="Network Uptime" value="99.99%" trend="0%" />
                         <StatCard icon={Users} label="Active Users" value="842" trend="+5%" />
                     </div>
-
-                    {/* Charts Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                         {/* Threat Detection Chart */}
                         <div className="bg-black/30 rounded-xl p-4">
@@ -78,8 +84,6 @@ const DashboardSection = () => {
                                 </ResponsiveContainer>
                             </div>
                         </div>
-
-                        {/* Network Traffic Chart */}
                         <div className="bg-black/30 rounded-xl p-4">
                             <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
                                 <Activity className="w-5 h-5 text-green-400" />
@@ -109,8 +113,6 @@ const DashboardSection = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Bottom Features Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <QuickActionCard
                             icon={Lock}
@@ -139,7 +141,7 @@ const DashboardSection = () => {
     );
 };
 
-const StatCard = ({ icon: Icon, label, value, trend }) => {
+const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, trend }) => {
     const trendColor = trend.startsWith('+') ? 'text-green-400' :
         trend.startsWith('-') ? 'text-red-400' : 'text-gray-400';
 
@@ -157,7 +159,7 @@ const StatCard = ({ icon: Icon, label, value, trend }) => {
     );
 };
 
-const QuickActionCard = ({ icon: Icon, title, description }) => {
+const QuickActionCard: React.FC<QuickActionCardProps> = ({ icon: Icon, title, description }) => {
     return (
         <div className="bg-black/30 rounded-xl p-4 hover:bg-black/40 transition-colors cursor-pointer group">
             <Icon className="w-6 h-6 text-green-400 mb-2 group-hover:scale-110 transition-transform" />
