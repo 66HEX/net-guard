@@ -101,7 +101,7 @@ export default function Navbar() {
                     <div className="w-full mx-auto flex items-center justify-between relative">
                         <button
                             onClick={() => handleScroll('#hero')}
-                            className="text-white/80 font-bold ml-0 lg:ml-4">
+                            className="text-white/80 font-bold">
                             <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" className="h-10 w-auto">
                                 <defs>
                                     <style>
