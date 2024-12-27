@@ -98,7 +98,7 @@ const Pricing = () => {
                                     rounded-3xl p-8 text-center group-hover:border-white/[0.1] transition-all duration-500">
                         <h3 className="text-xl font-medium mb-4">Need a Custom Solution?</h3>
                         <p className="text-gray-400 mb-6">
-                            Contact our team for a personalized security solution tailored to your organization's needs.
+                            Contact our team for a personalized security solution tailored to your organization&apos;s needs.
                         </p>
                         <button className="bg-white/[0.05] text-white px-6 py-3 rounded-full font-medium
                                             hover:bg-white/[0.1] transition-colors inline-flex items-center gap-2">
