@@ -14,7 +14,7 @@ const GlowingBorder = ({ opacity = "0.6" }: GlowingBorderProps) => {
         const element = borderRef.current;
         if (!element) return;
 
-        gsap.set(element, { opacity: 0 });
+        gsap.set(element, { opacity: 0.2 });
 
         const enterAnimation = () => {
             gsap.to(element, {

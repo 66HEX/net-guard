@@ -73,7 +73,7 @@ const FAQ = () => {
                 </div>
                 <div className="relative group max-w-4xl mx-auto">
                     <GlowingBorder />
-                    <div className="relative backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
+                    <div className="relative md:backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
                                     rounded-3xl p-8 group-hover:border-white/[0.1] transition-all duration-500">
                         {faqs.map((category) => (
                             <AccordionCategory
