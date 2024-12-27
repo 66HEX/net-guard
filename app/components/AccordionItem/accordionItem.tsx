@@ -15,7 +15,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
 
     useEffect(() => {
         if (!contentRef.current) return;
-        
+
         const height = contentRef.current.scrollHeight;
 
         const tl = gsap.timeline({
@@ -30,11 +30,10 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             force3D: true
         }, 0);
 
-        // Animuj rotację strzałki
         if (arrowRef.current) {
             tl.to(arrowRef.current, {
                 rotation: isOpen ? 180 : 0,
-                transformOrigin: "center center",
+                transformOrigin: "center",
                 force3D: true
             }, 0);
         }
@@ -52,9 +51,12 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
                 <span className="flex-1 text-base font-medium text-white">
                     {question}
                 </span>
-                <div ref={arrowRef}>
+                <div
+                    ref={arrowRef}
+                    className="ml-4 w-5 h-5 flex items-center justify-center"
+                >
                     <ChevronDown
-                        className="ml-4 flex-shrink-0 w-5 h-5 text-green-400"
+                        className="w-full h-full text-green-400"
                     />
                 </div>
             </button>
