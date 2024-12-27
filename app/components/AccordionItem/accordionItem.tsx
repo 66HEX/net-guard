@@ -9,36 +9,53 @@ interface AccordionItemProps {
     onClick: () => void;
 }
 
+// Funkcja inicjalizująca wysokość akordeonu
+const initializeAccordionHeight = (
+    contentRef: HTMLDivElement | null,
+    innerRef: HTMLDivElement | null
+) => {
+    if (!contentRef || !innerRef) return;
+    const height = innerRef.offsetHeight;
+    gsap.set(contentRef, { height: 0 });
+    return height;
+};
+
+const animateAccordion = async (
+    contentRef: HTMLDivElement | null,
+    height: number,
+    isOpen: boolean
+) => {
+    if (!contentRef) return;
+
+    await gsap.to(contentRef, {
+        height: isOpen ? height : 0,
+        duration: 0.5,
+        ease: 'power2.out',
+        force3D: true
+    });
+};
+
 const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps) => {
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
+    const innerRef = useRef<HTMLDivElement | null>(null);
     const [contentHeight, setContentHeight] = useState(0);
 
     useEffect(() => {
-        const element = contentRef.current;
-        if (!element) return;
+        const height = initializeAccordionHeight(contentRef.current, innerRef.current);
+        if (height) setContentHeight(height);
 
-        const updateHeight = () => {
-            const innerContent = element.firstElementChild;
-            if (innerContent instanceof HTMLElement) {
-                setContentHeight(innerContent.offsetHeight);
+        const handleResize = () => {
+            if (innerRef.current) {
+                setContentHeight(innerRef.current.offsetHeight);
             }
         };
 
-        window.addEventListener('resize', updateHeight);
-        updateHeight();
-
-        return () => window.removeEventListener('resize', updateHeight);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, [answer]);
 
     useEffect(() => {
-        const element = contentRef.current;
-        if (!element) return;
-
-        gsap.to(element, {
-            height: isOpen ? contentHeight : 0,
-            duration: 0.5,
-            ease: 'power2.out'
-        });
+        animateAccordion(contentRef.current, contentHeight, isOpen);
     }, [isOpen, contentHeight]);
 
     return (
@@ -58,9 +75,11 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             <div
                 ref={contentRef}
                 className="overflow-hidden"
-                style={{ height: 0 }}
             >
-                <div className="p-6 text-gray-400 leading-relaxed">
+                <div
+                    ref={innerRef}
+                    className="p-6 text-gray-400 leading-relaxed"
+                >
                     {answer}
                 </div>
             </div>
