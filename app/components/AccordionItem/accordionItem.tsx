@@ -45,7 +45,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             <button
                 onClick={onClick}
                 className="w-full flex items-center p-6 text-left rounded-2xl
-                    md:backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
+                    backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
                     hover:border-white/[0.1] transition-all duration-300"
             >
                 <span className="flex-1 text-base font-medium text-white">
