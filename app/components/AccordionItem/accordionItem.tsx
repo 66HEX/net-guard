@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import {useGSAP} from "@gsap/react";
 
 interface AccordionItemProps {
     question: string;
@@ -12,11 +13,27 @@ interface AccordionItemProps {
 const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
+    const [contentHeight, setContentHeight] = useState<number>(0);
 
     useEffect(() => {
-        if (!contentRef.current) return;
+        if (contentRef.current) {
+            const element = contentRef.current;
+            const originalHeight = element.style.height;
+            const originalOverflow = element.style.overflow;
 
-        const height = contentRef.current.scrollHeight;
+            element.style.height = 'auto';
+            element.style.overflow = 'visible';
+
+            const height = element.scrollHeight;
+            setContentHeight(height);
+
+            element.style.height = originalHeight;
+            element.style.overflow = originalOverflow;
+        }
+    }, [answer]);
+
+    useGSAP(() => {
+        if (!contentRef.current) return;
 
         const tl = gsap.timeline({
             defaults: {
@@ -26,7 +43,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
         });
 
         tl.to(contentRef.current, {
-            height: isOpen ? height : 0,
+            height: isOpen ? contentHeight : 0,
             force3D: true
         }, 0);
 
@@ -38,7 +55,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             }, 0);
         }
 
-    }, [isOpen]);
+    }, [isOpen, contentHeight]);
 
     return (
         <div className="mb-4">
@@ -53,7 +70,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
                 </span>
                 <div
                     ref={arrowRef}
-                    className="ml-4 w-5 h-5 flex items-center justify-center"
+                    className="ml-4 w-5 h-5 flex items-center justify-center will-change-transform"
                 >
                     <ChevronDown
                         className="w-full h-full text-green-400"
@@ -62,7 +79,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             </button>
             <div
                 ref={contentRef}
-                className="overflow-hidden h-0 will-change-transform"
+                className="overflow-hidden h-0 will-change-[height]"
             >
                 <div className="p-6 text-gray-400 leading-relaxed">
                     {answer}

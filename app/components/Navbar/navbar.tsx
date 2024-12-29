@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLenis } from 'lenis/react';
 import gsap from 'gsap';
+import {useGSAP} from "@gsap/react";
 
 export default function Navbar() {
     const lenis = useLenis();
@@ -52,7 +53,7 @@ export default function Navbar() {
             setIsMenuOpen(true);
         }
     };
-    useEffect(() => {
+    useGSAP(() => {
         if (isMenuOpen) {
             gsap.fromTo(menuRef.current,
                 {
