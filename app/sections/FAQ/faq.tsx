@@ -71,7 +71,7 @@ const FAQ = () => {
                         Find answers to common questions about NetGuard&apos;s features, security, and technical details.
                     </p>
                 </div>
-                <div className="relative group max-w-4xl mx-auto">
+                <div className="relative group max-w-4xl mx-auto will-change-transform">
                     <GlowingBorder />
                     <div className="relative backdrop-blur-md bg-white/[0.02] border border-white/[0.05]
                                     rounded-3xl p-8 group-hover:border-white/[0.1] transition-all duration-500">

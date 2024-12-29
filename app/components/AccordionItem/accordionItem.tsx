@@ -62,7 +62,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: AccordionItemProps
             </button>
             <div
                 ref={contentRef}
-                className="overflow-hidden h-0"
+                className="overflow-hidden h-0 will-change-transform"
             >
                 <div className="p-6 text-gray-400 leading-relaxed">
                     {answer}
